@@ -5,6 +5,9 @@ node-qiwi-api
 Get started
 ----------------
 Для начала вам необходимо получить токен на сайте [Qiwi](https://qiwi.com/api).
+```
+npm install node-qiwi-api
+```
 Инициализируйте новый кошелек с выданным токеном:
 ```js
 var Qiwi = require('node-qiwi-api').Qiwi;
@@ -20,6 +23,17 @@ Wallet.getAccountInfo((err, info) => {
     /*hanle error*/
   }
   console.log(info);
+}
+```
+
+Баланс
+----------------
+```js
+Wallet.getBalance((err, balance) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(balance);
 }
 ```
 История операций
@@ -48,6 +62,19 @@ Wallet.getOperationHistory({rows: 25, operation: "OUT"}, (err, operations) => {
   /* some code */
 }
 ```
+Статистика по операциям
+----------------
+Для получения статистики по суммам платежей за заданный период используется подзапрос запроса истории.
+```js
+Wallet.getOperationStats(requestOptions, (err, stats) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(stats);
+}
+```
+requestOptions: **operation, sources, startDate, endDate** - Параметры аналогичны параметрам в **getOperationHistory**.
+
 Перевод на Qiwi кошелек
 ----------------
 ```js
@@ -68,6 +95,18 @@ Wallet.toWallet({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', accoun
 Ничем не отличается от перевода на кошелек, за исключением того, что номер указывается без международного префикса:
 ```js
 Wallet.toWallet({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+}
+```
+
+Перевод на карту
+----------------
+Пока работает без уточнения комиссии. Ничем не отличается от других переводов, за исключением того, что в account указывается номер кредитной карты:
+```js
+Wallet.toCard({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', account: '5213********0000' }, (err, data) => {
   if(err) {
     /* handle err*/
     }
