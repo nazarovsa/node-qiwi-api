@@ -1,0 +1,8 @@
+{
+  "name": "node-qiwi-api",
+  "version": "1.0.0",
+  "main": "node-qiwi-api.js",
+  "dependencies": {
+    "request": "2.81.0"
+  }
+}
