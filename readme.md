@@ -78,14 +78,13 @@ requestOptions: **operation, sources, startDate, endDate** - Параметры 
 Перевод на Qiwi кошелек
 ----------------
 ```js
-Wallet.toWallet({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', account: '+79261234567' }, (err, data) => {
+Wallet.toWallet({ amount: '0.01', comment: 'test', account: '+79261234567' }, (err, data) => {
   if(err) {
     /* handle err*/
     }
   console.log(data);
 }
 ```
-* **id** - Клиентский ID транзакции (максимум 20 цифр). Должен быть уникальным для каждой транзакции и увеличиваться с каждой последующей транзакцией. Для выполнения этих требований рекомендуется задавать равным 1000*(Standard Unix time в секундах).
 * **amount** - Сумма
 * **comment** - Комментарий к платежу.
 * **account** - Номер телефона получателя (с международным префиксом)
@@ -94,7 +93,7 @@ Wallet.toWallet({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', accoun
 ----------------
 Ничем не отличается от перевода на кошелек, за исключением того, что номер указывается без международного префикса:
 ```js
-Wallet.toMobilePhone({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
+Wallet.toMobilePhone({ amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
   if(err) {
     /* handle err*/
     }
@@ -106,7 +105,7 @@ Wallet.toMobilePhone({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', a
 ----------------
 Пока работает без уточнения комиссии. Ничем не отличается от других переводов, за исключением того, что в account указывается номер кредитной карты:
 ```js
-Wallet.toCard({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', account: '5213********0000' }, (err, data) => {
+Wallet.toCard({ amount: '0.01', comment: 'test', account: '5213********0000' }, (err, data) => {
   if(err) {
     /* handle err*/
     }

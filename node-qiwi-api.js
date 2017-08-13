@@ -1,6 +1,18 @@
 var request = require("request");
 
 function Qiwi(token) {
+    this.recipients = {
+        qiwi: 99,
+        visa_rus: 1963,
+        mastercard_rus: 21013,
+        visa_sng: 1960,
+        mastercard_sng: 21012,
+        mir: 31652,
+        tinkoff: 466,
+        alfa: 464,
+        promsvyaz: 821,
+        russkiy_standard: 815
+    }
     this.token = token;
     this.headers = {
         'Accept': 'application/json',
@@ -77,7 +89,7 @@ function Qiwi(token) {
             url: this.apiUri + 'sinap/terms/99/payments',
             headers: this.headers,
             body: {
-                id: requestOptions.id.toString(),
+                id: (1000 * new Date.now()).toString(),
                 sum: {
                     amount: requestOptions.amount,
                     currency: "643"
@@ -110,7 +122,7 @@ function Qiwi(token) {
                     url: this.apiUri + 'sinap/terms/' + data.message + '/payments',
                     headers: this.headers,
                     body: {
-                        id: requestOptions.id.toString(),
+                        id: (1000 * new Date.now()).toString(),
                         sum: {
                             amount: requestOptions.amount,
                             currency: "643"
@@ -145,7 +157,7 @@ function Qiwi(token) {
                     url: this.apiUri + 'sinap/terms/' + data.message + '/payments',
                     headers: this.headers,
                     body: {
-                        id: requestOptions.id.toString(),
+                        id: (1000 * new Date.now()).toString(),
                         sum: {
                             amount: requestOptions.amount,
                             currency: "643"
@@ -170,6 +182,45 @@ function Qiwi(token) {
         });
     }
 
+    this.toBank = function (requestOptions, recipient, callback) {
+        var options = {
+            url: this.apiUri + 'sinap/terms/' + recipient + '/payments',
+            headers: this.headers,
+            body: {
+                id: (1000 * new Date.now()).toString(),
+                sum: {
+                    amount: requestOptions.amount,
+                    currency: "643"
+                },
+                source: "account_643",
+                paymentMethod: {
+                    type: "Account",
+                    accountId: "643"
+                },
+                comment: requestOptions.comment,
+                fields: {
+                    account: requestOptions.account,
+                    account_type: requestOptions.account_type,
+                    exp_date: requestOptions.exp_date
+                }
+            },
+            json: true
+        };
+
+        request.post(options, (error, response, body) => {
+            callback(error, body);
+        });
+    }
+
+    this.checkComission = function (recipient, callback) {
+        var options = {
+            url: this.apiUri + 'sinap/providers/' + recipient + '/form',
+        };
+
+        request.get(options, (error, response, body) => {
+            callback(error, JSON.parse(body));
+        });
+    }
 
     function detectOperator(phone, callback) {
         var options = {
