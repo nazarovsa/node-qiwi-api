@@ -94,7 +94,7 @@ Wallet.toWallet({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', accoun
 ----------------
 Ничем не отличается от перевода на кошелек, за исключением того, что номер указывается без международного префикса:
 ```js
-Wallet.toWallet({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
+Wallet.toMobilePhone({ id: 1000 * Date.now(), amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
   if(err) {
     /* handle err*/
     }
