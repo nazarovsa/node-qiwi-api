@@ -1,13 +1,13 @@
 {
   "name": "node-qiwi-api",
-  "version": "1.0.1",
+  "version": "1.0.12",
   "main": "node-qiwi-api.js",
   "dependencies": {
     "request": "2.81.0"
   },
   "keywords": [
-  	"QIWI",
-  	"Wallet"
+    "QIWI",
+    "Wallet"
   ],
   "author": "Sergey Nazarov, insight.appdev@gmail.com"
 }
