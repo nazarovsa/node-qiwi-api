@@ -147,6 +147,7 @@ Wallet.checkComission(recipient, (err, data) => {
   console.log(data);
 }
 ```
+data.content.terms.commission.ranges[i]:
 **recipient** - Допустимые значения хранятся в this.recipients. Список на [официальном сайте](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html#commission).
 Ответ содержит:
 * **bound** - Сумма платежа, начиная с которой применяется условие

@@ -28,8 +28,8 @@ function Qiwi(token) {
         };
 
         request.get(options, (error, response, body) => {
-            callback(error, JSON.parse(body));
-        })
+            callback(JSON.parse(error), JSON.parse(body));
+        });
     }
 
     this.getBalance = function (callback) {
@@ -39,8 +39,8 @@ function Qiwi(token) {
         };
 
         request.get(options, (error, response, body) => {
-            callback(error, JSON.parse(body));
-        })
+            callback(JSON.parse(error), JSON.parse(body));
+        });
     }
 
     this.getOperationHistory = function (requestOptions, callback) {
@@ -60,7 +60,7 @@ function Qiwi(token) {
             };
 
             request.get(options, (error, response, body) => {
-                callback(error, JSON.parse(body));
+                callback(JSON.parse(error), JSON.parse(body));
             });
         });
     }
@@ -79,7 +79,7 @@ function Qiwi(token) {
             };
 
             request.get(options, (error, response, body) => {
-                callback(error, JSON.parse(body));
+                callback(JSON.parse(error), JSON.parse(body));
             });
         });
     }
@@ -108,14 +108,14 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
-            callback(error, body);
+            callback(JSON.parse(error), JSON.parse(body));
         });
     }
 
     this.toMobilePhone = function (requestOptions, callback) {
         detectOperator('7' + requestOptions.account, (err, data) => {
             if (err || data.code.value == "2") {
-                throw new Error();
+                throw new Error('Can\'t detect operator.');
             }
             else {
                 var options = {
@@ -141,7 +141,7 @@ function Qiwi(token) {
                 };
 
                 request.post(options, (error, response, body) => {
-                    callback(error, body);
+                    callback(JSON.parse(error), JSON.parse(body));
                 });
             }
         });
@@ -150,7 +150,7 @@ function Qiwi(token) {
     this.toCard = function (requestOptions, callback) {
         detectCard(requestOptions.account, (err, data) => {
             if (err || data.code.value == "2") {
-                throw new Error();
+                throw new Error('Wrong card number!');
             }
             else {
                 var options = {
@@ -176,7 +176,7 @@ function Qiwi(token) {
                 };
 
                 request.post(options, (error, response, body) => {
-                    callback(error, body);
+                    callback(JSON.parse(error), JSON.parse(body));
                 });
             }
         });
@@ -208,7 +208,7 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
-            callback(error, body);
+            callback(JSON.parse(error), JSON.parse(body));
         });
     }
 
@@ -218,7 +218,7 @@ function Qiwi(token) {
         };
 
         request.get(options, (error, response, body) => {
-            callback(error, JSON.parse(body));
+            callback(JSON.parse(error), JSON.parse(body));
         });
     }
 
@@ -232,11 +232,11 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
-            callback(error, JSON.parse(body));
+            callback(JSON.parse(error), JSON.parse(body));
         });
     }
 
-    function detectCard(cardNumber, callback) {
+    this.detectCard = function (cardNumber, callback) {
         var options = {
             url: 'https://qiwi.com/card/detect.action',
             headers: this.headers,
@@ -246,11 +246,10 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
-            callback(error, JSON.parse(body));
+            callback(JSON.parse(error), JSON.parse(body));
         });
     }
 }
-
 
 module.exports = {
     Qiwi: Qiwi
