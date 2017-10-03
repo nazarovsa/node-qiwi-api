@@ -89,7 +89,7 @@ function Qiwi(token) {
             url: this.apiUri + 'sinap/terms/99/payments',
             headers: this.headers,
             body: {
-                id: (1000 * new Date.now()).toString(),
+                id: (1000 * Date.now()).toString(),
                 sum: {
                     amount: requestOptions.amount,
                     currency: "643"
@@ -108,7 +108,18 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
-            callback(JSON.parse(error), JSON.parse(body));
+            var _body, _error;
+            try {
+              _body = JSON.parse(body);
+            } catch (e) {
+              _error = e;
+            }
+            try {
+                _error = JSON.parse(error);
+            } catch (e) {
+              _error = e;
+            }
+            callback(_error, _body);
         });
     }
 
@@ -122,7 +133,7 @@ function Qiwi(token) {
                     url: this.apiUri + 'sinap/terms/' + data.message + '/payments',
                     headers: this.headers,
                     body: {
-                        id: (1000 * new Date.now()).toString(),
+                        id: (1000 * Date.now()).toString(),
                         sum: {
                             amount: requestOptions.amount,
                             currency: "643"
@@ -157,7 +168,7 @@ function Qiwi(token) {
                     url: this.apiUri + 'sinap/terms/' + data.message + '/payments',
                     headers: this.headers,
                     body: {
-                        id: (1000 * new Date.now()).toString(),
+                        id: (1000 * Date.now()).toString(),
                         sum: {
                             amount: requestOptions.amount,
                             currency: "643"
@@ -187,7 +198,7 @@ function Qiwi(token) {
             url: this.apiUri + 'sinap/terms/' + recipient + '/payments',
             headers: this.headers,
             body: {
-                id: (1000 * new Date.now()).toString(),
+                id: (1000 * Date.now()).toString(),
                 sum: {
                     amount: requestOptions.amount,
                     currency: "643"
