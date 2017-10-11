@@ -9,5 +9,6 @@
     "QIWI",
     "Wallet"
   ],
+  "url": "https://github.com/InsightAppDev/node-qiwi-api",
   "author": "Sergey Nazarov, insight.appdev@gmail.com"
 }
