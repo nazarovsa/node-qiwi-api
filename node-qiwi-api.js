@@ -24,22 +24,24 @@ function Qiwi(token) {
     this.getAccountInfo = function (callback) {
         var options = {
             url: this.apiUri + 'person-profile/v1/profile/current',
-            headers: this.headers
+            headers: this.headers,
+            json: true
         };
 
         request.get(options, (error, response, body) => {
-            callback(JSON.parse(error), JSON.parse(body));
+            callback(error, body);
         });
     }
 
     this.getBalance = function (callback) {
         var options = {
             url: this.apiUri + 'funding-sources/v1/accounts/current',
-            headers: this.headers
+            headers: this.headers,
+            json: true
         };
 
         request.get(options, (error, response, body) => {
-            callback(JSON.parse(error), JSON.parse(body));
+            callback(error, body);
         });
     }
 
@@ -56,11 +58,12 @@ function Qiwi(token) {
                     endDate: requestOptions.endDate,
                     nextTxnDate: requestOptions.nextTxnDate,
                     nextTxnId: requestOptions.nextTxnId
-                }
+                },
+                json: true
             };
 
             request.get(options, (error, response, body) => {
-                callback(JSON.parse(error), JSON.parse(body));
+                callback(error, body);
             });
         });
     }
@@ -75,11 +78,12 @@ function Qiwi(token) {
                     sources: requestOptions.sources,
                     startDate: requestOptions.startDate,
                     endDate: requestOptions.endDate
-                }
+                },
+                json: true
             };
 
             request.get(options, (error, response, body) => {
-                callback(JSON.parse(error), JSON.parse(body));
+                callback(error, body);
             });
         });
     }
@@ -108,18 +112,7 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
-            var _body, _error;
-            try {
-              _body = JSON.parse(body);
-            } catch (e) {
-              _error = e;
-            }
-            try {
-                _error = JSON.parse(error);
-            } catch (e) {
-              _error = e;
-            }
-            callback(_error, _body);
+            callback(error, body);
         });
     }
 
@@ -152,7 +145,7 @@ function Qiwi(token) {
                 };
 
                 request.post(options, (error, response, body) => {
-                    callback(JSON.parse(error), JSON.parse(body));
+                    callback(error, body);
                 });
             }
         });
@@ -161,7 +154,7 @@ function Qiwi(token) {
     this.toCard = function (requestOptions, callback) {
         detectCard(requestOptions.account, (err, data) => {
             if (err || data.code.value == "2") {
-                throw new Error('Wrong card number!');
+                callback(new Error('Wrong card number!', null));
             }
             else {
                 var options = {
@@ -187,7 +180,7 @@ function Qiwi(token) {
                 };
 
                 request.post(options, (error, response, body) => {
-                    callback(JSON.parse(error), JSON.parse(body));
+                    callback(error, body);
                 });
             }
         });
@@ -219,17 +212,18 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
-            callback(JSON.parse(error), JSON.parse(body));
+            callback(error, body);
         });
     }
 
     this.checkComission = function (recipient, callback) {
         var options = {
             url: this.apiUri + 'sinap/providers/' + recipient + '/form',
+            json: true
         };
 
         request.get(options, (error, response, body) => {
-            callback(JSON.parse(error), JSON.parse(body));
+            callback(error, body);
         });
     }
 
@@ -239,11 +233,12 @@ function Qiwi(token) {
             headers: this.headers,
             qs: {
                 phone: phone
-            }
+            },
+            json: true
         };
 
         request.post(options, (error, response, body) => {
-            callback(JSON.parse(error), JSON.parse(body));
+            callback(error, body);
         });
     }
 
@@ -253,11 +248,12 @@ function Qiwi(token) {
             headers: this.headers,
             qs: {
                 cardNumber: cardNumber
-            }
+            },
+            json: true
         };
 
         request.post(options, (error, response, body) => {
-            callback(JSON.parse(error), JSON.parse(body));
+            callback(error, body);
         });
     }
 }
