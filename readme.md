@@ -4,8 +4,6 @@ node-qiwi-api
 
 Get started
 ----------------
-Ссылка на [GitHub](https://github.com/InsightAppDev/node-qiwi-api).  
-
 Для начала вам необходимо получить токен на сайте [Qiwi](https://qiwi.com/api).
 ```
 npm install node-qiwi-api
