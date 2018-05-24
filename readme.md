@@ -23,7 +23,7 @@ Wallet.getAccountInfo((err, info) => {
     /*hanle error*/
   }
   console.log(info);
-}
+})
 ```
 
 Баланс
@@ -34,7 +34,7 @@ Wallet.getBalance((err, balance) => {
     /*hanle error*/
   }
   console.log(balance);
-}
+})
 ```
 История операций
 ----------------
@@ -44,7 +44,7 @@ Wallet.getOperationHistory(requestOptions, (err, operations) => {
     /*hanle error*/
   }
   console.log(operations);
-}
+})
 ```
 requestOptions включают в себя: 
 * **rows** - Число платежей в ответе, для разбивки отчета на части. Целое число от 1 до 50. Обязательный параметр.
@@ -60,7 +60,7 @@ requestOptions включают в себя:
 ```js
 Wallet.getOperationHistory({rows: 25, operation: "OUT"}, (err, operations) => {
   /* some code */
-}
+})
 ```
 Статистика по операциям
 ----------------
@@ -71,7 +71,7 @@ Wallet.getOperationStats(requestOptions, (err, stats) => {
     /*hanle error*/
   }
   console.log(stats);
-}
+})
 ```
 requestOptions: **operation, sources, startDate, endDate** - Параметры аналогичны параметрам в **getOperationHistory**.
 
@@ -83,7 +83,7 @@ Wallet.toWallet({ amount: '0.01', comment: 'test', account: '+79261234567' }, (e
     /* handle err*/
     }
   console.log(data);
-}
+})
 ```
 * **amount** - Сумма
 * **comment** - Комментарий к платежу.
@@ -98,7 +98,7 @@ Wallet.toMobilePhone({ amount: '0.01', comment: 'test', account: '9261234567' },
     /* handle err*/
     }
   console.log(data);
-}
+})
 ```
 
 Перевод на карту
@@ -110,7 +110,7 @@ Wallet.toCard({ amount: '0.01', comment: 'test', account: '5213********0000' }, 
     /* handle err*/
     }
   console.log(data);
-}
+})
 ```
 
 Перевод на банковский счет
@@ -121,7 +121,7 @@ Wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
     /* handle err*/
     }
   console.log(data);
-}
+})
 ```
 * **ammount** - Сумма
 * **account** - Номер карты/счета получателя
@@ -145,7 +145,7 @@ Wallet.checkComission(recipient, (err, data) => {
     /* handle err*/
     }
   console.log(data);
-}
+})
 ```
 data.content.terms.commission.ranges[i]:
 * **recipient** - Допустимые значения хранятся в this.recipients. Список на [официальном сайте](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html#commission).
