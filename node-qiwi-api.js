@@ -280,7 +280,7 @@ function Qiwi(token) {
             headers: this.headers,
             qs: {
                 hookType: 1,
-                parameter: url,
+                param: url,
                 txnType: txnType
             },
             json: true
