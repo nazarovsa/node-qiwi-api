@@ -21,6 +21,12 @@ function Qiwi(token) {
     }
     this.apiUri = "https://edge.qiwi.com/";
 
+    this.txnType = {
+        "IN": 0,
+        "OUT": 1,
+        "ALL": 2
+    }
+
     this.getAccountInfo = function (callback) {
         var options = {
             url: this.apiUri + 'person-profile/v1/profile/current',
@@ -145,7 +151,7 @@ function Qiwi(token) {
                 };
 
                 request.post(options, (error, response, body) => {
-                    if(typeof body.code != 'undefined') error = body;
+                    if (typeof body.code != 'undefined') error = body;
                     callback(error, body);
                 });
             }
@@ -217,6 +223,11 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Проверяет значение комиссии
+     * @param {number} recipient идентификатор получателя (this.recipients)
+     * @param {*} callback 
+     */
     this.checkComission = function (recipient, callback) {
         var options = {
             url: this.apiUri + 'sinap/providers/' + recipient + '/form',
@@ -254,6 +265,111 @@ function Qiwi(token) {
         };
 
         request.post(options, (error, response, body) => {
+            callback(error, body);
+        });
+    }
+
+    /**
+     * Добавляет вебхук по заданному url 
+     * @param {string} url Url адрес вебхука
+     * @param {number} txnType тип сообщений. 0 - "Входящие", 1 - "Исходящие". 2 - "Все". (this.txnType)
+     */
+    this.addWebHook = function (url, txnType, callback) {
+        var options = {
+            url: this.apiUri + 'payment-notifier/v1/hooks',
+            headers: this.headers,
+            qs: {
+                hookType: 1,
+                parameter: url,
+                txnType: txnType
+            },
+            json: true
+        };
+
+        request.put(options, (error, response, body) => {
+            callback(error, body);
+        });
+    }
+
+    /**
+     * Удаляет вебхук с заданным UUID
+     * @param {string} hookId UUID вебхука
+     * @param {*} callback 
+     */
+    this.removeWebHook = function (hookId, callback) {
+        var options = {
+            url: this.apiUri + 'payment-notifier/v1/hooks/' + hookId,
+            headers: this.headers,
+            json: true
+        };
+
+        request.delete(options, (error, response, body) => {
+            callback(error, body);
+        });
+    }
+
+    /**
+     * Получает секретный ключ вебхука по UUID
+     * @param {string} hookId UUID
+     * @param {*} callback 
+     */
+    this.getWebHookSecret = function (hookId, callback) {
+        var options = {
+            url: this.apiUri + 'payment-notifier/v1/hooks/' + hookId + '/key',
+            headers: this.headers,
+            json: true
+        };
+
+        request.get(options, (error, response, body) => {
+            callback(error, body);
+        });
+    }
+
+    /**
+     * Обновляет секретный ключ вебхука по UUID
+     * @param {string} hookId UUID
+     * @param {*} callback 
+     */
+    this.requestNewWebHookSecret = function (hookId, callback) {
+        var options = {
+            url: this.apiUri + 'payment-notifier/v1/hooks/' + hookId + '/newkey',
+            headers: this.headers,
+            json: true
+        };
+
+        request.post(options, (error, response, body) => {
+            callback(error, body);
+        });
+    }
+
+    /**
+     * Возвращает данные об активнон вебхуке для данного кощелька(токена)
+     * @param {*} callback
+     */
+    this.getActiveWebHook = function (callback) {
+        var options = {
+            url: this.apiUri + 'payment-notifier/v1/hooks/active',
+            headers: this.headers,
+            json: true
+        };
+
+        request.get(options, (error, response, body) => {
+            callback(error, body);
+        });
+    }
+
+    /**
+     * Отправляет тестовый запрос на активный вебхук
+     * @param {*} callback 
+     */
+    this.testActiveWebHook = function (callback) {
+        var options = {
+            url: this.apiUri + 'payment-notifier/v1/hooks/test',
+            headers: this.headers,
+            json: true
+        };
+
+        request.get(options, (error, response, body) => {
             callback(error, body);
         });
     }
