@@ -1,6 +1,6 @@
 {
   "name": "node-qiwi-api",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "node-qiwi-api.js",
   "dependencies": {
     "request": "2.81.0"
