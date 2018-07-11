@@ -1,5 +1,10 @@
 var request = require("request");
 
+/**
+ * Qiwi api
+ * @param {string} token 
+ * @link https://github.com/InsightAppDev/node-qiwi-api
+ */
 function Qiwi(token) {
     this.recipients = {
         qiwi: 99,
@@ -27,6 +32,10 @@ function Qiwi(token) {
         "ALL": 2
     }
 
+    /**
+     * Возвращает информацию о текущем аккаунте
+     * @param {function(err,data)} callback 
+     */
     this.getAccountInfo = function (callback) {
         var options = {
             url: this.apiUri + 'person-profile/v1/profile/current',
@@ -39,6 +48,10 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Возвращает информацию о балансе аккаунта
+     * @param {function(err,data)} callback 
+     */
     this.getBalance = function (callback) {
         var options = {
             url: this.apiUri + 'funding-sources/v1/accounts/current',
@@ -51,6 +64,11 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Возвращает историю операций аккаунта
+     * @param {{rows:number, operation:string, sources:string, startDate:Date, endDate:Date, nextTxnDate:Date, nextTxnId:number} requestOptions 
+     * @param {function(err,data)} callback 
+     */
     this.getOperationHistory = function (requestOptions, callback) {
         this.getAccountInfo((err, data) => {
             var options = {
@@ -74,6 +92,11 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Возвращает статистику по операциям
+     * @param {{operation:string, sources:string, startDate:Date, endDate:Date}} requestOptions 
+     * @param {function(err,data)} callback 
+     */
     this.getOperationStats = function (requestOptions, callback) {
         this.getAccountInfo((err, data) => {
             var options = {
@@ -94,6 +117,11 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Перевод средств на qiwi кошелек
+     * @param {{amount:number, comment:string, account:string}} requestOptions 
+     * @param {function(err,data)} callback 
+     */
     this.toWallet = function (requestOptions, callback) {
         var options = {
             url: this.apiUri + 'sinap/terms/99/payments',
@@ -122,6 +150,11 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Перевод средств на мобильный телефон
+     * @param {{amount:number, comment:string, account:string}} requestOptions 
+     * @param {function(err,data)} callback 
+     */
     this.toMobilePhone = function (requestOptions, callback) {
         detectOperator('7' + requestOptions.account, (err, data) => {
             if (err || data.code.value == "2") {
@@ -158,6 +191,11 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Перевод стредств на карту
+     * @param {{amount:number, comment:string, account:string}} requestOptions 
+     * @param {function(err,data)} callback 
+     */
     this.toCard = function (requestOptions, callback) {
         detectCard(requestOptions.account, (err, data) => {
             if (err || data.code.value == "2") {
@@ -193,6 +231,12 @@ function Qiwi(token) {
         });
     }
 
+    /**
+     * Перевод на банковский счет
+     * @param {{ammount:number,account:string,account_type:number,exp_date:number}} requestOptions 
+     * @param {number} recipient 
+     * @param {function(err,data)} callback 
+     */
     this.toBank = function (requestOptions, recipient, callback) {
         var options = {
             url: this.apiUri + 'sinap/terms/' + recipient + '/payments',
@@ -224,7 +268,7 @@ function Qiwi(token) {
     }
 
     /**
-     * Проверяет значение комиссии
+     * Проверяет значение комиссии по операции
      * @param {number} recipient идентификатор получателя (this.recipients)
      * @param {*} callback 
      */
