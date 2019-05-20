@@ -197,7 +197,7 @@ function Qiwi(token) {
      * @param {function(err,data)} callback 
      */
     this.toCard = function (requestOptions, callback) {
-        detectCard(requestOptions.account, (err, data) => {
+        this.detectCard(requestOptions.account, (err, data) => {
             if (err || data.code.value == "2") {
                 callback(new Error('Wrong card number!', null));
             }
