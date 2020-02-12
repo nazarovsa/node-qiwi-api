@@ -71,6 +71,13 @@ function Qiwi(token) {
      */
     this.getOperationHistory = function (requestOptions, callback) {
         this.getAccountInfo((err, data) => {
+            if (err != null) {
+                return callback(err, null);
+            }
+            if (data == null) {
+                return callback(new Error("Can not retrieve account info"), null);
+            }
+
             var options = {
                 url: this.apiUri + 'payment-history/v1/persons/' + data.authInfo.personId + '/payments',
                 headers: this.headers,
@@ -86,8 +93,8 @@ function Qiwi(token) {
                 json: true
             };
 
-            request.get(options, (error, response, body) => {
-                callback(error, body);
+            request.get(options, (error, response) => {
+                callback(error, response.body);
             });
         });
     }
@@ -99,6 +106,16 @@ function Qiwi(token) {
      */
     this.getOperationStats = function (requestOptions, callback) {
         this.getAccountInfo((err, data) => {
+            if (err != null) {
+                callback(err, null);
+                return;
+            }
+
+            if (data == null) {
+                callback(new Error("Can not retrieve account info"), null);
+                return;
+            }
+
             var options = {
                 url: this.apiUri + 'payment-history/v1/persons/' + data.authInfo.personId + '/payments/total',
                 headers: this.headers,
