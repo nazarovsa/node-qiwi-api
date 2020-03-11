@@ -1,21 +1,21 @@
 node-qiwi-api
 ================
-Официальная [документация](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html) к Qiwi api.
+Official [documentation](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html) for Qiwi api.
 
 Get started
 ----------------
-Для начала вам необходимо получить токен на сайте [Qiwi](https://qiwi.com/api).
+Firstly, get access token at [Qiwi](https://qiwi.com/api).
 ```
 npm install node-qiwi-api
 ```
-Инициализируйте новый кошелек с выданным токеном:
+Initialise new wallet instance with your access token:
 ```js
 var Qiwi = require('node-qiwi-api').Qiwi;
 var Wallet = new Qiwi(token);
 ```
-Теперь вы можете получать информацию о кошельке и совершать переводы на другие кошельки, мобильный телефон и карты.
+Now you can get information about your wallet and make money transfers.
 
-Информация об аккаунте
+Information about account
 ----------------
 ```js
 Wallet.getAccountInfo((err, info) => {
@@ -26,7 +26,7 @@ Wallet.getAccountInfo((err, info) => {
 })
 ```
 
-Баланс
+Balance
 ----------------
 ```js
 Wallet.getBalance((err, balance) => {
@@ -36,7 +36,7 @@ Wallet.getBalance((err, balance) => {
   console.log(balance);
 })
 ```
-История операций
+Operation history
 ----------------
 ```js
 Wallet.getOperationHistory(requestOptions, (err, operations) => {
@@ -47,7 +47,7 @@ Wallet.getOperationHistory(requestOptions, (err, operations) => {
 })
 ```
 requestOptions включают в себя: 
-* **rows** - Число платежей в ответе, для разбивки отчета на части. Целое число от 1 до 50. Обязательный параметр.
+* **rows** - Amount of payments in response. Integer from 1 to 50. Required.
 * **operation** - Тип операций в отчете, для отбора. Допустимые значения: ALL - все операции, IN - только пополнения, OUT - только платежи, QIWI_CARD - только платежи по картам QIWI (QVC, QVP). По умолчанию ALL
 * **sources** - Источники платежа, для отбора. Каждый источник задается как отдельный параметр и нумеруется элементом массива, начиная с нуля (sources[0], sources[1] и т.д.). Допустимые значения: QW_RUB - рублевый счет кошелька, QW_USD - счет кошелька в долларах, QW_EUR - счет кошелька в евро, CARD - привязанные и непривязанные к кошельку банковские карты, MK - счет мобильного оператора. Если не указаны, учитываются все источники
 * **startDate** - Начальная дата поиска платежей (формат ГГГГ-ММ-ДДTчч:мм:ссZ). По умолчанию, равен вчерашней дате. Используется только вместе с endDate
