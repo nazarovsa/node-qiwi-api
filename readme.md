@@ -2,7 +2,7 @@ node-qiwi-api
 ================
 [![npm](https://img.shields.io/npm/v/node-qiwi-api)](https://www.npmjs.com/package/node-qiwi-api)
 [![npm](https://img.shields.io/npm/dt/node-qiwi-api.svg)](https://www.npmjs.com/package/node-qiwi-api)
-[![npm](https://img.shields.io/npm/dw/node-qiwi-api.svg)](https://www.npmjs.com/package/node-qiwi-api)
+[![npm](https://img.shields.io/npm/dm/node-qiwi-api.svg)](https://www.npmjs.com/package/node-qiwi-api)
 ----------------
 Official [documentation](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html) for Qiwi api.
 
