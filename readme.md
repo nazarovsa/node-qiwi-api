@@ -1,21 +1,25 @@
 node-qiwi-api
 ================
-Официальная [документация](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html) к Qiwi api.
+[![npm](https://img.shields.io/npm/v/node-qiwi-api)](https://www.npmjs.com/package/node-qiwi-api)
+[![npm](https://img.shields.io/npm/dt/node-qiwi-api.svg)](https://www.npmjs.com/package/node-qiwi-api)
+[![npm](https://img.shields.io/npm/dw/node-qiwi-api.svg)](https://www.npmjs.com/package/node-qiwi-api)
+----------------
+Official [documentation](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html) for Qiwi api.
 
 Get started
 ----------------
-Для начала вам необходимо получить токен на сайте [Qiwi](https://qiwi.com/api).
+Firstly, get access token at [Qiwi](https://qiwi.com/api).
 ```
 npm install node-qiwi-api
 ```
-Инициализируйте новый кошелек с выданным токеном:
+Initialise new wallet instance with your access token:
 ```js
 var Qiwi = require('node-qiwi-api').Qiwi;
 var Wallet = new Qiwi(token);
 ```
-Теперь вы можете получать информацию о кошельке и совершать переводы на другие кошельки, мобильный телефон и карты.
+Now you can get information about your wallet and make money transfers.
 
-Информация об аккаунте
+Information about account
 ----------------
 ```js
 Wallet.getAccountInfo((err, info) => {
@@ -26,7 +30,7 @@ Wallet.getAccountInfo((err, info) => {
 })
 ```
 
-Баланс
+Balance
 ----------------
 ```js
 Wallet.getBalance((err, balance) => {
@@ -36,7 +40,7 @@ Wallet.getBalance((err, balance) => {
   console.log(balance);
 })
 ```
-История операций
+Operation history
 ----------------
 ```js
 Wallet.getOperationHistory(requestOptions, (err, operations) => {
@@ -47,24 +51,24 @@ Wallet.getOperationHistory(requestOptions, (err, operations) => {
 })
 ```
 requestOptions включают в себя: 
-* **rows** - Число платежей в ответе, для разбивки отчета на части. Целое число от 1 до 50. Обязательный параметр.
-* **operation** - Тип операций в отчете, для отбора. Допустимые значения: ALL - все операции, IN - только пополнения, OUT - только платежи, QIWI_CARD - только платежи по картам QIWI (QVC, QVP). По умолчанию ALL
-* **sources** - Источники платежа, для отбора. Каждый источник задается как отдельный параметр и нумеруется элементом массива, начиная с нуля (sources[0], sources[1] и т.д.). Допустимые значения: QW_RUB - рублевый счет кошелька, QW_USD - счет кошелька в долларах, QW_EUR - счет кошелька в евро, CARD - привязанные и непривязанные к кошельку банковские карты, MK - счет мобильного оператора. Если не указаны, учитываются все источники
-* **startDate** - Начальная дата поиска платежей (формат ГГГГ-ММ-ДДTчч:мм:ссZ). По умолчанию, равен вчерашней дате. Используется только вместе с endDate
-* **endDate** - Конечная дата поиска платежей (формат ГГГГ-ММ-ДДTчч:мм:ссZ). По умолчанию, равен текущей дате. Используется только вместе с startDate
-* **nextTxnDate** - Дата транзакции (формат ГГГГ-ММ-ДДTчч:мм:ссZ), для отсчета от предыдущего списка (см. параметр nextTxnDate в ответе). Используется только вместе с nextTxnId
-* **nextTxnId** - 	Номер предшествующей транзакции, для отсчета от предыдущего списка (см. параметр nextTxnId в ответе). Используется только вместе с nextTxnDate
-Максимальный допустимый интервал между startDate и endDate - 90 календарных дней.
+* **rows** - Amount of payments in response. Integer from 1 to 50. Required.
+* **operation** - Operation type. ALL - all operations, IN - incoming only, OUT - outgoing only, QIWI_CARD - just payments by QIWI cards (QVC, QVP). Default - ALL
+* **sources** - Payment source. Каждый источник задается как отдельный параметр и нумеруется элементом массива, начиная с нуля (sources[0], sources[1] и т.д.). Допустимые значения: QW_RUB - рублевый счет кошелька, QW_USD - счет кошелька в долларах, QW_EUR - счет кошелька в евро, CARD - привязанные и непривязанные к кошельку банковские карты, MK - счет мобильного оператора. Если не указаны, учитываются все источники
+* **startDate** - Start date (YYYY-MM-ddThh:mm:ssZ). By default equals yesterday date. Use only with endDate
+* **endDate** - End date (YYYY-MM-ddThh:mm:ssZ). By default equals current date. Use only with startDate
+* **nextTxnDate** - Transaction date (YYYY-MM-ddThh:mm:ssZ), (see nextTxnDate in response). Use only with nextTxnId
+* **nextTxnId** - Previous transaction number (see nextTxnId in response). Use only with nextTxnDate
+Maximum interval between startDate and endDate - 90 days.
 
-Например информация о 25 исходящих платежах может быть получена следующим образом:
+As example - information about 25 outgoing payments can be get by next way:
 ```js
 Wallet.getOperationHistory({rows: 25, operation: "OUT"}, (err, operations) => {
   /* some code */
 })
 ```
-Статистика по операциям
+Operations statistics
 ----------------
-Для получения статистики по суммам платежей за заданный период используется подзапрос запроса истории.
+If you want to see statistics for summs of payments by period of time use this method. Example:
 ```js
 Wallet.getOperationStats(requestOptions, (err, stats) => {
   if(err) {
@@ -73,9 +77,9 @@ Wallet.getOperationStats(requestOptions, (err, stats) => {
   console.log(stats);
 })
 ```
-requestOptions: **operation, sources, startDate, endDate** - Параметры аналогичны параметрам в **getOperationHistory**.
+requestOptions: **operation, sources, startDate, endDate** - Parameters are similar to **getOperationHistory**.
 
-Перевод на Qiwi кошелек
+Transfer to Qiwi wallet
 ----------------
 ```js
 Wallet.toWallet({ amount: '0.01', comment: 'test', account: '+79261234567' }, (err, data) => {
@@ -85,13 +89,13 @@ Wallet.toWallet({ amount: '0.01', comment: 'test', account: '+79261234567' }, (e
   console.log(data);
 })
 ```
-* **amount** - Сумма
-* **comment** - Комментарий к платежу.
-* **account** - Номер телефона получателя (с международным префиксом)
+* **amount** - Ammount of money
+* **comment** - Commentary for payment.
+* **account** - Receiver phone number (with international prefix)
 
-Перевод на мобильный телефон
+Transfer to mobile phone
 ----------------
-Ничем не отличается от перевода на кошелек, за исключением того, что номер указывается без международного префикса:
+Similar to "transfer to qiwi wallet", but  number without international prefix:
 ```js
 Wallet.toMobilePhone({ amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
   if(err) {
@@ -101,9 +105,9 @@ Wallet.toMobilePhone({ amount: '0.01', comment: 'test', account: '9261234567' },
 })
 ```
 
-Перевод на карту
+Transfer to card
 ----------------
-Ничем не отличается от других переводов, за исключением того, что в account указывается номер кредитной карты:
+Similar to other transfers, but account is card number:
 ```js
 Wallet.toCard({ amount: '0.01', comment: 'test', account: '5213********0000' }, (err, data) => {
   if(err) {
@@ -113,7 +117,7 @@ Wallet.toCard({ amount: '0.01', comment: 'test', account: '5213********0000' }, 
 })
 ```
 
-Перевод на банковский счет
+Transfer to bank account
 ----------------
 ```js
 Wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', exp_date: 'MMYY' }, recipient, (err, data) => {
@@ -123,21 +127,21 @@ Wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
   console.log(data);
 })
 ```
-* **ammount** - Сумма
-* **account** - Номер карты/счета получателя
-* **account_type** - Тип банковского идентификатора. Допустимые значения:
-  * для Тинькофф Банк - карта “1”, договор “3”
-  * для Альфа-Банка - карта “1”, счет “2”
-  * для Промсвязьбанка - карта “7”, счет “9”
-  * для банка Русский Стандарт - карта “1”, счет “2”, договор “3”
-* **exp_date** - Срок действия карты, в формате ММГГ (например, 0218). Только для перевода на карту.
-* **recipient** - Допустимые значения:
-  * 466 - Тинькофф Банк
-  * 464 - Альфа-Банк
-  * 821 - Промсвязьбанк
-  * 815 - Русский Стандарт
+* **ammount** - Ammount of money
+* **account** - Receiver card/account number
+* **account_type** - Type of bank identificator.
+  * for Tinkoff Bank (Тинькофф Банк) - card “1”, contract “3”
+  * for Alfa-bank (Альфа-Банк) - card “1”, account “2”
+  * for Promsvyazbank (Промсвязьбанк) - card “7”, account “9”
+  * for Russian Standard (Русский Стандарт) - card “1”, account “2”, contract “3”
+* **exp_date** - Card expiration date (MMYY), в формате ММГГ (as examlpe: 0218 - february 2018). Only for card transfer.
+* **recipient** -
+  * 466 - Tinkoff Bank (Тинькофф Банк)
+  * 464 - Alfa-bank (Альфа-Банка)
+  * 821 - Promsvyazbank (Промсвязьбанк)
+  * 815 - Russian Standard (Русский Стандарт)
 
-Уточнение комиссии по операции
+Check operation commission
 ----------------
 ```js
 Wallet.checkComission(recipient, (err, data) => {
@@ -148,8 +152,8 @@ Wallet.checkComission(recipient, (err, data) => {
 })
 ```
 data.content.terms.commission.ranges[i]:
-* **recipient** - Допустимые значения хранятся в this.recipients. Список на [официальном сайте](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html#commission).
-Ответ содержит:
-* **bound** - Сумма платежа, начиная с которой применяется условие
-* **rate** - Комиссия (абс.множитель)
-* **fixed** - Фиксированная сумма комиссии
+* **recipient** - Allowable values stored in this.recipients. List at [official site](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html#commission).
+Response contains:
+* **bound** - Payment amount, starting from which the condition applies
+* **rate** - Commission (absolute multiplier)
+* **fixed** - Fixed amount of commission
