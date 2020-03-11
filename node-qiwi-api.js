@@ -289,7 +289,7 @@ function Qiwi(token) {
      * @param {number} recipient идентификатор получателя (this.recipients)
      * @param {*} callback 
      */
-    this.checkComission = function (recipient, callback) {
+    this.checkCommission = function (recipient, callback) {
         var options = {
             url: this.apiUri + 'sinap/providers/' + recipient + '/form',
             json: true

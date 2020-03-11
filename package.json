@@ -1,6 +1,6 @@
 {
   "name": "node-qiwi-api",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "main": "node-qiwi-api.js",
   "dependencies": {
     "request": "2.88.2"
@@ -12,6 +12,7 @@
   "bugs": {
     "url": "https://github.com/InsightAppDev/node-qiwi-api/issues"
   },
+  "license" : "MIT",
   "homepage": "https://github.com/InsightAppDev/node-qiwi-api",
   "author": "Sergey Nazarov, insight.appdev@gmail.com"
 }

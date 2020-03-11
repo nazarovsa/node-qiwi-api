@@ -144,7 +144,7 @@ Wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
 Check operation commission
 ----------------
 ```js
-Wallet.checkComission(recipient, (err, data) => {
+Wallet.checkCommission(recipient, (err, data) => {
   if(err) {
     /* handle err*/
     }
