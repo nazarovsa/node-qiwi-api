@@ -176,6 +176,22 @@ wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
   * 821 - Promsvyazbank (Промсвязьбанк)
   * 815 - Russian Standard (Русский Стандарт)
 
+Check commission rates
+----------------
+```js
+wallet.checkOnlineCommission(recipient, requestOptions, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+**recipient** - Allowable values stored in this.recipients.
+
+requestOptions includes: 
+* **account** - Phone number with international prefix or card/account number, as example 79991234567
+* **amount** - Amount of money for calculate commission
+
 Check operation commission
 ----------------
 ```js
@@ -187,7 +203,7 @@ wallet.checkCommission(recipient, (err, data) => {
 })
 ```
 data.content.terms.commission.ranges[i]:
-* **recipient** - Allowable values stored in this.recipients. List at [official site](https://developer.qiwi.com/qiwiwallet/qiwicom_ru.html#commission).
+* **recipient** - Allowable values stored in this.recipients.
 Response contains:
 * **bound** - Payment amount, starting from which the condition applies
 * **rate** - Commission (absolute multiplier)
