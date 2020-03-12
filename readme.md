@@ -14,8 +14,8 @@ npm install node-qiwi-api
 ```
 Initialise new wallet instance with your access token:
 ```js
-var Qiwi = require('node-qiwi-api').Qiwi;
-var Wallet = new Qiwi(token);
+var Qiwi = require('node-qiwi-api');
+var wallet = new Qiwi(token);
 ```
 Now you can get information about your wallet and make money transfers.
 
@@ -23,7 +23,7 @@ Identification data
 ----------------
 [Docs](https://developer.qiwi.com/ru/qiwi-wallet-personal/index.html#ident_data)
 ```js
-Wallet.getIdentificationData(wallet, (err, data) => {
+wallet.getIdentificationData(wallet, (err, data) => {
   if(err) {
     /*hanle error*/
   }
@@ -35,7 +35,7 @@ Identify wallet
 ----------------
 [Docs](https://developer.qiwi.com/ru/qiwi-wallet-personal/index.html#ident)
 ```js
-Wallet.identifyWallet(wallet, requestOptions, (err, data) => {
+wallet.identifyWallet(wallet, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
@@ -57,7 +57,7 @@ requestOptions includes:
 Information about account
 ----------------
 ```js
-Wallet.getAccountInfo((err, info) => {
+wallet.getAccountInfo((err, info) => {
   if(err) {
     /*hanle error*/
   }
@@ -68,7 +68,7 @@ Wallet.getAccountInfo((err, info) => {
 Balance
 ----------------
 ```js
-Wallet.getBalance((err, balance) => {
+wallet.getBalance((err, balance) => {
   if(err) {
     /*hanle error*/
   }
@@ -78,7 +78,7 @@ Wallet.getBalance((err, balance) => {
 Operation history
 ----------------
 ```js
-Wallet.getOperationHistory(requestOptions, (err, operations) => {
+wallet.getOperationHistory(requestOptions, (err, operations) => {
   if(err) {
     /*hanle error*/
   }
@@ -97,7 +97,7 @@ Maximum interval between startDate and endDate - 90 days.
 
 As example - information about 25 outgoing payments can be get by next way:
 ```js
-Wallet.getOperationHistory({rows: 25, operation: "OUT"}, (err, operations) => {
+wallet.getOperationHistory({rows: 25, operation: "OUT"}, (err, operations) => {
   /* some code */
 })
 ```
@@ -105,7 +105,7 @@ Operations statistics
 ----------------
 If you want to see statistics for summs of payments by period of time use this method. Example:
 ```js
-Wallet.getOperationStats(requestOptions, (err, stats) => {
+wallet.getOperationStats(requestOptions, (err, stats) => {
   if(err) {
     /*hanle error*/
   }
@@ -117,7 +117,7 @@ requestOptions: **operation, sources, startDate, endDate** - Parameters are simi
 Transfer to Qiwi wallet
 ----------------
 ```js
-Wallet.toWallet({ amount: '0.01', comment: 'test', account: '+79261234567' }, (err, data) => {
+wallet.toWallet({ amount: '0.01', comment: 'test', account: '+79261234567' }, (err, data) => {
   if(err) {
     /* handle err*/
     }
@@ -132,7 +132,7 @@ Transfer to mobile phone
 ----------------
 Similar to "transfer to qiwi wallet", but  number without international prefix:
 ```js
-Wallet.toMobilePhone({ amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
+wallet.toMobilePhone({ amount: '0.01', comment: 'test', account: '9261234567' }, (err, data) => {
   if(err) {
     /* handle err*/
     }
@@ -144,7 +144,7 @@ Transfer to card
 ----------------
 Similar to other transfers, but account is card number:
 ```js
-Wallet.toCard({ amount: '0.01', comment: 'test', account: '5213********0000' }, (err, data) => {
+wallet.toCard({ amount: '0.01', comment: 'test', account: '5213********0000' }, (err, data) => {
   if(err) {
     /* handle err*/
     }
@@ -155,7 +155,7 @@ Wallet.toCard({ amount: '0.01', comment: 'test', account: '5213********0000' }, 
 Transfer to bank account
 ----------------
 ```js
-Wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', exp_date: 'MMYY' }, recipient, (err, data) => {
+wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', exp_date: 'MMYY' }, recipient, (err, data) => {
   if(err) {
     /* handle err*/
     }
@@ -179,7 +179,7 @@ Wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
 Check operation commission
 ----------------
 ```js
-Wallet.checkCommission(recipient, (err, data) => {
+wallet.checkCommission(recipient, (err, data) => {
   if(err) {
     /* handle err*/
     }
