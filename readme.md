@@ -19,6 +19,41 @@ var Wallet = new Qiwi(token);
 ```
 Now you can get information about your wallet and make money transfers.
 
+Identification data
+----------------
+[Docs](https://developer.qiwi.com/ru/qiwi-wallet-personal/index.html#ident_data)
+```js
+Wallet.getIdentificationData(wallet, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(info);
+})
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+```
+Identify wallet
+----------------
+[Docs](https://developer.qiwi.com/ru/qiwi-wallet-personal/index.html#ident)
+```js
+Wallet.identifyWallet(wallet, requestOptions, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(info);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
+requestOptions includes: 
+* **birthDate** - Date of birth (YYYY-MM-DD)
+* **firstName** - First name
+* **middleName** - Middle name
+* **lastName** - Last name
+* **passport** - Serial and number of passport 
+* **snils** - SNILS number
+* **inn** - INN number
+* **oms** - OMS number
+
 Information about account
 ----------------
 ```js
@@ -50,7 +85,7 @@ Wallet.getOperationHistory(requestOptions, (err, operations) => {
   console.log(operations);
 })
 ```
-requestOptions включают в себя: 
+requestOptions includes: 
 * **rows** - Amount of payments in response. Integer from 1 to 50. Required.
 * **operation** - Operation type. ALL - all operations, IN - incoming only, OUT - outgoing only, QIWI_CARD - just payments by QIWI cards (QVC, QVP). Default - ALL
 * **sources** - Payment source. Каждый источник задается как отдельный параметр и нумеруется элементом массива, начиная с нуля (sources[0], sources[1] и т.д.). Допустимые значения: QW_RUB - рублевый счет кошелька, QW_USD - счет кошелька в долларах, QW_EUR - счет кошелька в евро, CARD - привязанные и непривязанные к кошельку банковские карты, MK - счет мобильного оператора. Если не указаны, учитываются все источники
