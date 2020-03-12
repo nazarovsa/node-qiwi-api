@@ -21,7 +21,6 @@ Now you can get information about your wallet and make money transfers.
 
 Identification data
 ----------------
-[Docs](https://developer.qiwi.com/ru/qiwi-wallet-personal/index.html#ident_data)
 ```js
 wallet.getIdentificationData(wallet, (err, data) => {
   if(err) {
@@ -33,7 +32,6 @@ wallet.getIdentificationData(wallet, (err, data) => {
 ```
 Identify wallet
 ----------------
-[Docs](https://developer.qiwi.com/ru/qiwi-wallet-personal/index.html#ident)
 ```js
 wallet.identifyWallet(wallet, requestOptions, (err, data) => {
   if(err) {
