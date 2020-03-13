@@ -26,7 +26,7 @@ wallet.getIdentificationData(wallet, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(info);
+  console.log(data);
 })
 ```
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
@@ -38,7 +38,7 @@ wallet.identifyWallet(wallet, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(info);
+  console.log(data);
 })
 ```
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
@@ -56,11 +56,11 @@ requestOptions includes:
 Information about account
 ----------------
 ```js
-wallet.getAccountInfo((err, info) => {
+wallet.getAccountInfo((err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(info);
+  console.log(data);
 })
 ```
 
@@ -71,29 +71,70 @@ wallet.getAccounts(wallet, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(info);
+  console.log(data);
 })
 ```
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
 
-Balance
+Get possible account aliases
 ----------------
+Return possible for creation at your wallet account aliases
 ```js
-wallet.getBalance((err, balance) => {
+wallet.getPossibleAccountAliases(wallet, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(balance);
+  console.log(data);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
+Create account
+----------------
+Create account in new currency
+```js
+wallet.createAccount(wallet, accountAlias, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(data);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+**accountAlias** - Account alias, posible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
+
+Set default account
+----------------
+Set default account for all operations
+```js
+wallet.setDefaultAccount(wallet, accountAlias, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(data);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+**accountAlias** - Account alias, posible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
+
+Balance
+----------------
+```js
+wallet.getBalance((err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(data);
 })
 ```
 Operation history
 ----------------
 ```js
-wallet.getOperationHistory(requestOptions, (err, operations) => {
+wallet.getOperationHistory(requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(operations);
+  console.log(data);
 })
 ```
 requestOptions includes: 
@@ -116,11 +157,11 @@ Operations statistics
 ----------------
 If you want to see statistics for summs of payments by period of time use this method. Example:
 ```js
-wallet.getOperationStatistics(requestOptions, (err, stats) => {
+wallet.getOperationStatistics(requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(stats);
+  console.log(data);
 })
 ```
 requestOptions: **operation, sources, startDate, endDate** - Parameters are similar to **getOperationHistory**.
@@ -133,7 +174,7 @@ wallet.getTransactionInfo(transactionId, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(stats);
+  console.log(data);
 })
 ```
 
@@ -145,7 +186,7 @@ wallet.getReceipt(transactionId, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(stats);
+  console.log(data);
 })
 ```
 requestOptions includes: 

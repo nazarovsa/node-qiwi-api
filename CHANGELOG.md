@@ -3,6 +3,9 @@
 Add
 ---------------------
 * getAccounts - get wallet accounts
+* createAccount - create account in new currency by alias
+* setDefaultAccount - set default account
+* getPossibleAccountAliases - get possible account aliases
 * getIdentificationData - get wallet identification data
 * getCrossRates - get exchange rates
 * getTransactionInfo - get information about transaction
