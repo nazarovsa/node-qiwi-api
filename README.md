@@ -86,7 +86,7 @@ wallet.getOperationHistory(requestOptions, (err, operations) => {
 requestOptions includes: 
 * **rows** - Amount of payments in response. Integer from 1 to 50. Required.
 * **operation** - Operation type. ALL - all operations, IN - incoming only, OUT - outgoing only, QIWI_CARD - just payments by QIWI cards (QVC, QVP). Default - ALL
-* **sources** - Payment source. Каждый источник задается как отдельный параметр и нумеруется элементом массива, начиная с нуля (sources[0], sources[1] и т.д.). Допустимые значения: QW_RUB - рублевый счет кошелька, QW_USD - счет кошелька в долларах, QW_EUR - счет кошелька в евро, CARD - привязанные и непривязанные к кошельку банковские карты, MK - счет мобильного оператора. Если не указаны, учитываются все источники
+* **sources** - Payment source. Array of values. Allowable values: QW_RUB - ruble account of wallet, QW_USD - usd account of wallet, QW_EUR - euro account of wallet, CARD - added and not added to wallet cards, MK - account of mobile operator. If not presented, you will receive info from all sources
 * **startDate** - Start date (YYYY-MM-ddThh:mm:ssZ). By default equals yesterday date. Use only with endDate
 * **endDate** - End date (YYYY-MM-ddThh:mm:ssZ). By default equals current date. Use only with startDate
 * **nextTxnDate** - Transaction date (YYYY-MM-ddThh:mm:ssZ), (see nextTxnDate in response). Use only with nextTxnId
@@ -123,6 +123,21 @@ wallet.getTransactionInfo(transactionId, (err, data) => {
   console.log(stats);
 })
 ```
+
+Get transaction receipt
+----------------
+Example:
+```js
+wallet.getReceipt(transactionId, requestOptions, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(stats);
+})
+```
+requestOptions includes: 
+* **type** - Transaction type from getOperationHistory
+* **format** - File format, see wallet.receiptFormat
 
 Transfer to Qiwi wallet
 ----------------
@@ -175,16 +190,28 @@ wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
 * **ammount** - Ammount of money
 * **account** - Receiver card/account number
 * **account_type** - Type of bank identificator.
-  * for Tinkoff Bank (Тинькофф Банк) - card “1”, contract “3”
-  * for Alfa-bank (Альфа-Банк) - card “1”, account “2”
-  * for Promsvyazbank (Промсвязьбанк) - card “7”, account “9”
-  * for Russian Standard (Русский Стандарт) - card “1”, account “2”, contract “3”
+  * for Alfa-bank (Альфа-Банк) - 1
+  * for OTP Bank (АО ОТП БАНК) - 1
+  * for Rosselhozbank (АО РОССЕЛЬХОЗБАНК) - 5
+  * for Russian Standard (Русский Стандарт) - 1
+  * for VTB (ВТБ ПАО) - 5
+  * for Promsvyazbank (Промсвязьбанк) - 7
+  * for Sberbank (ПАО Сбербанк) - 5
+  * for Renessans Credit (Ренессанс Кредит) - 1
+  * for Moscow Credit Bank (ПАО Московский кредитный банк) - 5
 * **exp_date** - Card expiration date (MMYY), в формате ММГГ (as examlpe: 0218 - february 2018). Only for card transfer.
 * **recipient** -
-  * 466 - Tinkoff Bank (Тинькофф Банк)
   * 464 - Alfa-bank (Альфа-Банка)
-  * 821 - Promsvyazbank (Промсвязьбанк)
+  * 466 - Tinkoff Bank (Тинькофф Банк)
+  * 804 - OTP Bank (АО ОТП БАНК)
+  * 810 - Rosselhozbank (АО РОССЕЛЬХОЗБАНК)
   * 815 - Russian Standard (Русский Стандарт)
+  * 816 - VTB (ВТБ ПАО)
+  * 821 - Promsvyazbank (Промсвязьбанк)
+  * 870 - Sberbank (ПАО Сбербанк)
+  * 881 - Renessans Credit (Ренессанс Кредит)
+  * 1135 - Moscow Credit Bank (ПАО Московский кредитный банк)
+
 
 Check commission rates
 ----------------
@@ -196,7 +223,7 @@ wallet.checkOnlineCommission(recipient, requestOptions, (err, data) => {
   console.log(data);
 })
 ```
-**recipient** - Allowable values stored in this.recipients.
+**recipient** - Allowable values stored in wallet.recipients
 
 requestOptions includes: 
 * **account** - Phone number with international prefix or card/account number, as example 79991234567
@@ -213,7 +240,7 @@ wallet.checkCommission(recipient, (err, data) => {
 })
 ```
 data.content.terms.commission.ranges[i]:
-* **recipient** - Allowable values stored in this.recipients.
+* **recipient** - Allowable values stored in wallet.recipients
 Response contains:
 * **bound** - Payment amount, starting from which the condition applies
 * **rate** - Commission (absolute multiplier)
