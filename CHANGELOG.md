@@ -24,3 +24,7 @@ Update
 Rename
 ---------------------
 * getOperationStats -> getOperationStatistics
+
+Remove
+---------------------
+* getBalance - now you can get same data from getAccounts

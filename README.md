@@ -103,6 +103,8 @@ wallet.createAccount(wallet, accountAlias, (err, data) => {
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
 **accountAlias** - Account alias, possible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
 
+If call was successfull as *data* you will have *{ success: true }*, else *{ success: false }*
+
 Set default account
 ----------------
 Set default account for all operations
@@ -117,16 +119,8 @@ wallet.setDefaultAccount(wallet, accountAlias, (err, data) => {
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
 **accountAlias** - Account alias, possible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
 
-Balance
-----------------
-```js
-wallet.getBalance((err, data) => {
-  if(err) {
-    /*hanle error*/
-  }
-  console.log(data);
-})
-```
+If call was successfull as *data* you will have *{ success: true }*, else *{ success: false }*
+
 Operation history
 ----------------
 ```js
