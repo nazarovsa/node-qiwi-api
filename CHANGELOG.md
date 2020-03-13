@@ -19,6 +19,7 @@ Update
 * recipients
 * getOperationHistory - update path to v2
 * getOperationStatistics - update path to v2
+* getOperationHistory and getOperationStatistics - now accepts wallet into arguments and not calling getAccountInfo anymore
 
 Rename
 ---------------------

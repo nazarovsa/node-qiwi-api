@@ -101,7 +101,7 @@ wallet.createAccount(wallet, accountAlias, (err, data) => {
 })
 ```
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
-**accountAlias** - Account alias, posible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
+**accountAlias** - Account alias, possible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
 
 Set default account
 ----------------
@@ -115,7 +115,7 @@ wallet.setDefaultAccount(wallet, accountAlias, (err, data) => {
 })
 ```
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
-**accountAlias** - Account alias, posible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
+**accountAlias** - Account alias, possible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
 
 Balance
 ----------------
@@ -130,13 +130,15 @@ wallet.getBalance((err, data) => {
 Operation history
 ----------------
 ```js
-wallet.getOperationHistory(requestOptions, (err, data) => {
+wallet.getOperationHistory(wallet, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
   console.log(data);
 })
 ```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
 requestOptions includes: 
 * **rows** - Amount of payments in response. Integer from 1 to 50. Required.
 * **operation** - Operation type. ALL - all operations, IN - incoming only, OUT - outgoing only, QIWI_CARD - just payments by QIWI cards (QVC, QVP). Default - ALL
@@ -157,13 +159,15 @@ Operations statistics
 ----------------
 If you want to see statistics for summs of payments by period of time use this method. Example:
 ```js
-wallet.getOperationStatistics(requestOptions, (err, data) => {
+wallet.getOperationStatistics(wallet, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
   console.log(data);
 })
 ```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
 requestOptions: **operation, sources, startDate, endDate** - Parameters are similar to **getOperationHistory**.
 
 Get transaction info
