@@ -28,8 +28,9 @@ wallet.getIdentificationData(wallet, (err, data) => {
   }
   console.log(info);
 })
-**wallet** - wallet number without plus (+) and with prefix (79991234567)
 ```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
 Identify wallet
 ----------------
 ```js
