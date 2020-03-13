@@ -64,6 +64,18 @@ wallet.getAccountInfo((err, info) => {
 })
 ```
 
+Get accounts
+----------------
+```js
+wallet.getAccounts(wallet, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(info);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
 Balance
 ----------------
 ```js

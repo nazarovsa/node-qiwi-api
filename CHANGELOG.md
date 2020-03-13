@@ -2,12 +2,13 @@
 =====================
 Add
 ---------------------
+* getAccounts - get wallet accounts
 * getIdentificationData - get wallet identification data
-* identifyWallet - identify wallet 
 * getCrossRates - get exchange rates
 * getTransactionInfo - get information about transaction
-* checkOnlineCommission - get information about future operation commission
 * getReceipt - get receipt of transaction
+* checkOnlineCommission - get information about future operation commission
+* identifyWallet - identify wallet 
 
 Update
 ---------------------
