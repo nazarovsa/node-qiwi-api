@@ -241,6 +241,7 @@ wallet.checkCommission(recipient, (err, data) => {
 ```
 data.content.terms.commission.ranges[i]:
 * **recipient** - Allowable values stored in wallet.recipients
+
 Response contains:
 * **bound** - Payment amount, starting from which the condition applies
 * **rate** - Commission (absolute multiplier)
