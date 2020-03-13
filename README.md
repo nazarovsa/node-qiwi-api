@@ -103,7 +103,7 @@ Operations statistics
 ----------------
 If you want to see statistics for summs of payments by period of time use this method. Example:
 ```js
-wallet.getOperationStats(requestOptions, (err, stats) => {
+wallet.getOperationStatistics(requestOptions, (err, stats) => {
   if(err) {
     /*hanle error*/
   }
@@ -111,6 +111,18 @@ wallet.getOperationStats(requestOptions, (err, stats) => {
 })
 ```
 requestOptions: **operation, sources, startDate, endDate** - Parameters are similar to **getOperationHistory**.
+
+Get transaction info
+----------------
+Example:
+```js
+wallet.getTransactionInfo(transactionId, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(stats);
+})
+```
 
 Transfer to Qiwi wallet
 ----------------
