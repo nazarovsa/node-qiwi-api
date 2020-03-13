@@ -26,10 +26,11 @@ wallet.getIdentificationData(wallet, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(info);
+  console.log(data);
 })
-**wallet** - wallet number without plus (+) and with prefix (79991234567)
 ```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
 Identify wallet
 ----------------
 ```js
@@ -37,7 +38,7 @@ wallet.identifyWallet(wallet, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(info);
+  console.log(data);
 })
 ```
 **wallet** - wallet number without plus (+) and with prefix (79991234567)
@@ -55,34 +56,83 @@ requestOptions includes:
 Information about account
 ----------------
 ```js
-wallet.getAccountInfo((err, info) => {
+wallet.getAccountInfo((err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(info);
+  console.log(data);
 })
 ```
 
-Balance
+Get accounts
 ----------------
 ```js
-wallet.getBalance((err, balance) => {
+wallet.getAccounts(wallet, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(balance);
+  console.log(data);
 })
 ```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
+Get possible account aliases
+----------------
+Return possible for creation at your wallet account aliases
+```js
+wallet.getPossibleAccountAliases(wallet, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(data);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
+Create account
+----------------
+Create account in new currency
+```js
+wallet.createAccount(wallet, accountAlias, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(data);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+**accountAlias** - Account alias, possible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
+
+If call was successfull as *data* you will have *{ success: true }*, else *{ success: false }*
+
+Set default account
+----------------
+Set default account for all operations
+```js
+wallet.setDefaultAccount(wallet, accountAlias, (err, data) => {
+  if(err) {
+    /*hanle error*/
+  }
+  console.log(data);
+})
+```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+**accountAlias** - Account alias, possible values: *qw_wallet_rub, qw_wallet_kzt, qw_wallet_usd, qw_wallet_eur*
+
+If call was successfull as *data* you will have *{ success: true }*, else *{ success: false }*
+
 Operation history
 ----------------
 ```js
-wallet.getOperationHistory(requestOptions, (err, operations) => {
+wallet.getOperationHistory(wallet, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(operations);
+  console.log(data);
 })
 ```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
 requestOptions includes: 
 * **rows** - Amount of payments in response. Integer from 1 to 50. Required.
 * **operation** - Operation type. ALL - all operations, IN - incoming only, OUT - outgoing only, QIWI_CARD - just payments by QIWI cards (QVC, QVP). Default - ALL
@@ -103,13 +153,15 @@ Operations statistics
 ----------------
 If you want to see statistics for summs of payments by period of time use this method. Example:
 ```js
-wallet.getOperationStatistics(requestOptions, (err, stats) => {
+wallet.getOperationStatistics(wallet, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(stats);
+  console.log(data);
 })
 ```
+**wallet** - wallet number without plus (+) and with prefix (79991234567)
+
 requestOptions: **operation, sources, startDate, endDate** - Parameters are similar to **getOperationHistory**.
 
 Get transaction info
@@ -120,7 +172,7 @@ wallet.getTransactionInfo(transactionId, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(stats);
+  console.log(data);
 })
 ```
 
@@ -132,7 +184,7 @@ wallet.getReceipt(transactionId, requestOptions, (err, data) => {
   if(err) {
     /*hanle error*/
   }
-  console.log(stats);
+  console.log(data);
 })
 ```
 requestOptions includes: 
@@ -241,6 +293,7 @@ wallet.checkCommission(recipient, (err, data) => {
 ```
 data.content.terms.commission.ranges[i]:
 * **recipient** - Allowable values stored in wallet.recipients
+
 Response contains:
 * **bound** - Payment amount, starting from which the condition applies
 * **rate** - Commission (absolute multiplier)
