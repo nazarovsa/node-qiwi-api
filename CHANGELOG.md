@@ -31,4 +31,5 @@ Remove
 
 Infrastructure
 ---------------------
+* Add async api
 * Replace request with axios
