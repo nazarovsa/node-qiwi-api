@@ -24,6 +24,7 @@ Update
 Rename
 ---------------------
 * getOperationStats -> getOperationStatistics
+* requestNewWebHookSecret -> getNewWebHookSecret
 
 Remove
 ---------------------
@@ -31,4 +32,5 @@ Remove
 
 Infrastructure
 ---------------------
+* Add async api
 * Replace request with axios

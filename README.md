@@ -12,10 +12,15 @@ Firstly, get access token at [Qiwi](https://qiwi.com/api).
 ```
 npm install node-qiwi-api
 ```
+You can use callback and promise based api.
+
 Initialise new wallet instance with your access token:
 ```js
-var Qiwi = require('node-qiwi-api');
-var wallet = new Qiwi(token);
+var callbackQiwi = require('node-qiwi-api').callbackApi;
+var asyncQiwi = require('node-qiwi-api').asyncApi;
+
+var callbackWallet = new callbackQiwi(token);
+var asyncWallet = new asyncQiwi(token);
 ```
 Now you can get information about your wallet and make money transfers.
 
