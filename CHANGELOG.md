@@ -28,3 +28,7 @@ Rename
 Remove
 ---------------------
 * getBalance - now you can get same data from getAccounts
+
+Infrastructure
+---------------------
+* Replace request with axios
