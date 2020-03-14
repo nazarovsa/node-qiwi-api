@@ -24,6 +24,7 @@ Update
 Rename
 ---------------------
 * getOperationStats -> getOperationStatistics
+* requestNewWebHookSecret -> getNewWebHookSecret
 
 Remove
 ---------------------
