@@ -280,6 +280,32 @@ wallet.getCrossRates((err, data) => {
 })
 ```
 
+Transfer by requisites
+----------------
+```js
+wallet.toCard(requestOptions, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+requestOptions includes: 
+* **ammount** - Ammount of money
+* **account** - Receiver account number
+* **bankName** - Receiver bank name 
+* **bik** - Receiver bank bik 
+* **city** - Receiver city 
+* **organizationName** - Receiver organization name 
+* **inn** - Receiver organization inn 
+* **kpp** - Receiver organization kpp 
+* **nds** - 'НДС не облагается' or 'В т.ч. НДС'
+* **purpose** - Purpose of payment
+* **urgent** - 0 or 1. Urgent pay need 10 minutes to complete. Available from 9.00 AM to 8.30 PM (09.00 - 20.30) by Moscow time (GMT+3). Service fee - 25 rubles
+* **senderName** - Sender name 
+* **senderMiddleName** - Sender middle name
+* **senderLastName** - Sender last name
+
 Convert currency at you wallet
 ----------------
 ```js

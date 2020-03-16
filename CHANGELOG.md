@@ -13,6 +13,7 @@ Add
 * checkOnlineCommission - get information about future operation commission
 * identifyWallet - identify wallet 
 * convertCurrency - convert currenty at wallet
+* toRequisites - pay by requisites
 
 Update
 ---------------------
