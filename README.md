@@ -269,6 +269,32 @@ wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
   * 881 - Renessans Credit (Ренессанс Кредит)
   * 1135 - Moscow Credit Bank (ПАО Московский кредитный банк)
 
+Get currency exchange rates
+----------------
+```js
+wallet.getCrossRates((err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+
+Convert currency at you wallet
+----------------
+```js
+wallet.convertCurrency({amount: 10, currency: wallet.currencyCode.KZT, account:'+79991234567'}, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+requestOptions includes: 
+* **account** - Phone number with plus and international prefix, as example +79991234567
+* **currency** - Currency code - 3 number by ISO-4217 (see wallet.currencyCode)
+* **amount** - Amount of money for calculate commission
+* **comment** - Commentary for payment.
 
 Check commission rates
 ----------------
