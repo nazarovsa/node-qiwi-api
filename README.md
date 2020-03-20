@@ -322,6 +322,24 @@ requestOptions includes:
 * **amount** - Amount of money for calculate commission
 * **comment** - Commentary for payment.
 
+
+Get invoices
+----------------
+```js
+wallet.getInvoices(requestOptions, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+requestOptions includes:
+* **rows** - Amount of payments in response. Integer from 1 to 50. Required.
+* **from** - Date from
+* **to** - Date to
+* **nextId** - If present, method will return invoices from this id
+* **nextDate** - If present, method will return invoices created before this time
+
 Check commission rates
 ----------------
 ```js

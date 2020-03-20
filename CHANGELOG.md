@@ -1,3 +1,11 @@
+2.1.0
+=====================
+Add
+---------------------
+* getInvoices - get invoices
+* payInvoice - pay invoice
+* cancelInvoice - cancel not payed invoice
+
 2.0.0
 =====================
 Add
