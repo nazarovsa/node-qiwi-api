@@ -256,7 +256,7 @@ wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
   * for Sberbank (ПАО Сбербанк) - 5
   * for Renessans Credit (Ренессанс Кредит) - 1
   * for Moscow Credit Bank (ПАО Московский кредитный банк) - 5
-* **exp_date** - Card expiration date (MMYY), в формате ММГГ (as examlpe: 0218 - february 2018). Only for card transfer.
+* **exp_date** - Card expiration date (MMYY), as examlpe: 0218 - february 2018. Only for card transfer.
 * **recipient** -
   * 464 - Alfa-bank (Альфа-Банка)
   * 466 - Tinkoff Bank (Тинькофф Банк)
