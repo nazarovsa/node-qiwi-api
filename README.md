@@ -340,6 +340,19 @@ requestOptions includes:
 * **nextId** - If present, method will return invoices from this id
 * **nextDate** - If present, method will return invoices created before this time
 
+Pay invoice
+----------------
+```js
+wallet.payInvoice(invoiceId, currency, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+* **invoiceId** - Invoice id from getInvoices (bills[].id)
+* **currency** - Currency from getInvoices (bills[].sum.currency)
+
 Check commission rates
 ----------------
 ```js
