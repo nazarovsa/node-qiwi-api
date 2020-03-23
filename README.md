@@ -353,6 +353,18 @@ wallet.payInvoice(invoiceId, currency, (err, data) => {
 * **invoiceId** - Invoice id from getInvoices (bills[].id)
 * **currency** - Currency from getInvoices (bills[].sum.currency)
 
+Cancel invoice
+----------------
+```js
+wallet.cancelInvoice(invoiceId, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+* **invoiceId** - Invoice id from getInvoices (bills[].id)
+
 Check commission rates
 ----------------
 ```js
