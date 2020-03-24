@@ -256,7 +256,7 @@ wallet.toBank({ amount: '0.01', account: '5213********0000', account_type: '1', 
   * for Sberbank (ПАО Сбербанк) - 5
   * for Renessans Credit (Ренессанс Кредит) - 1
   * for Moscow Credit Bank (ПАО Московский кредитный банк) - 5
-* **exp_date** - Card expiration date (MMYY), в формате ММГГ (as examlpe: 0218 - february 2018). Only for card transfer.
+* **exp_date** - Card expiration date (MMYY), as examlpe: 0218 - february 2018. Only for card transfer.
 * **recipient** -
   * 464 - Alfa-bank (Альфа-Банка)
   * 466 - Tinkoff Bank (Тинькофф Банк)
@@ -321,6 +321,49 @@ requestOptions includes:
 * **currency** - Currency code - 3 number by ISO-4217 (see wallet.currencyCode)
 * **amount** - Amount of money for calculate commission
 * **comment** - Commentary for payment.
+
+
+Get invoices
+----------------
+```js
+wallet.getInvoices(requestOptions, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+requestOptions includes:
+* **rows** - Amount of payments in response. Integer from 1 to 50. Required.
+* **from** - Date from
+* **to** - Date to
+* **nextId** - If present, method will return invoices from this id
+* **nextDate** - If present, method will return invoices created before this time
+
+Pay invoice
+----------------
+```js
+wallet.payInvoice(invoiceId, currency, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+* **invoiceId** - Invoice id from getInvoices (bills[].id)
+* **currency** - Currency from getInvoices (bills[].sum.currency)
+
+Cancel invoice
+----------------
+```js
+wallet.cancelInvoice(invoiceId, (err, data) => {
+  if(err) {
+    /* handle err*/
+    }
+  console.log(data);
+})
+```
+* **invoiceId** - Invoice id from getInvoices (bills[].id)
 
 Check commission rates
 ----------------
