@@ -24,6 +24,8 @@ var asyncWallet = new asyncQiwi(token);
 ```
 Now you can get information about your wallet and make money transfers.
 
+**Next examples presented for callback api.**
+
 Identification data
 ----------------
 ```js
