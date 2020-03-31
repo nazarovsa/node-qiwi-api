@@ -293,7 +293,7 @@ wallet.toCard(requestOptions, (err, data) => {
 })
 ```
 requestOptions includes: 
-* **ammount** - Ammount of money
+* **amount** - Amount of money
 * **account** - Receiver account number
 * **bankName** - Receiver bank name 
 * **bik** - Receiver bank bik 
