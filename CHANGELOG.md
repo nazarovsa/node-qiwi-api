@@ -1,3 +1,13 @@
+2.1.1
+=====================
+Add
+---------------------
+* toOther - payment method, that can help with making transfers to Yandex.Money, Steam etc.
+
+Update
+---------------------
+* Fixed spelling of "ammount" in asyncApi.js and callbackApi.js
+
 2.1.0
 =====================
 Add
