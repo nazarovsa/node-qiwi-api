@@ -10,9 +10,9 @@
     "Wallet"
   ],
   "bugs": {
-    "url": "https://github.com/InsightAppDev/node-qiwi-api/issues"
+    "url": "https://github.com/nazarovsa/node-qiwi-api/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/InsightAppDev/node-qiwi-api",
+  "homepage": "https://github.com/nazarovsa/node-qiwi-api",
   "author": "Sergey Nazarov, insight.appdev@gmail.com"
 }
