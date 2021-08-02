@@ -1,3 +1,9 @@
+2.2.0
+=====================
+Add
+---------------------
+* getAccountLimits - Get account limits
+
 2.1.3
 =====================
 Update
